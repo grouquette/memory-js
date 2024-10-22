@@ -1,102 +1,142 @@
 @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400);
 
 * {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 body {
-    font-family: 'Source Sans Pro', sans-serif;
-    background-color: rgb(230, 233, 236);
+  font-family: "Source Sans Pro", sans-serif;
+  background-color: rgba(23, 222, 152, 0.24);
 }
 
 nav {
-    position: relative;
-    margin-top: 5%;
-    left: 50%;
-    width: 100%;
-    text-align: center;
+  position: relative;
+  margin-top: 5%;
+  left: 50%;
+  width: 100%;
+  text-align: center;
 
-    transform: translateX(-50%) translateY(-50%);
-    -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
 
-    &:after {
-        content: "";
-        display: table;
-        clear: both;
-    }
+  ul {
+    li {
+      list-style: none;
+      display: inline-block;
+      overflow: hidden;
 
-    ul {
-        li {
-            list-style: none;
-            display: inline-block;
-            overflow: hidden;
+      a {
+        display: block;
+        padding: 10px 40px;
+        text-decoration: none;
+        font-size: 18px;
+        position: relative;
+        color: fade(white, 80%);
+        transform: translateX(-15%);
+        border-radius: 50px;
+        width: 130%;
+        text-align: center;
+        transition-duration: 0.25s;
 
-            a {
-                display: block;
-                padding: 10px 40px;
-                text-decoration: none;
-                font-size: 18px;
-                position: relative;
-                color: fade(white, 80%);
-                transform: translateX(-15%);
-                border-radius: 50px;
-                width: 130%;
-                text-align: center;
-                transition-duration: 0.25s;
-
-                &:hover {
-                    color: white;
-                }
-            }
-
-            &.active {
-                a {
-                    color: white;
-                }
-            }
-
-            &:nth-child(1) {
-                a {
-                    background-color: #69AF23;
-                }
-            }
-
-            &:nth-child(2n) {
-                a {
-                    background-color: #008737;
-                }
-            }
-
-            &:nth-child(3n) {
-                a {
-                    background-color: #FFC300;
-                }
-            }
-
-            &:nth-child(4n) {
-                a {
-                    background-color: #E62D87;
-                }
-            }
-
-            &:nth-child(5n) {
-                a {
-                    background-color: #d16a21;
-                }
-            }
+        &:hover {
+          color: white;
         }
-    }
+      }
 
-    .dot {
-        background-color: red;
-        width: 6px;
-        height: 6px;
-        position: absolute;
-        bottom: -20px;
-        left: 0;
-        border-radius: 50%;
-        transition-duration: 0.5s;
+      &.active {
+        a {
+          color: rgb(234, 33, 33);
+        }
+      }
+
+      &:nth-child(1) {
+        a {
+          background-color: #69af23;
+        }
+      }
+
+      &:nth-child(2n) {
+        a {
+          background-color: #008737;
+        }
+      }
+
+      &:nth-child(3n) {
+        a {
+          background-color: #ffc300;
+        }
+      }
+
+      &:nth-child(4n) {
+        a {
+          background-color: #ed9fc5;
+        }
+      }
+
+      &:nth-child(5n) {
+        a {
+          background-color: #d16a21;
+        }
+      }
     }
+  }
+}
+.grid {
+    max-width: 960px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;  
+}
+
+.card {
+    position: relative;
+    transition: all 0.4s linear;
+    transform-style: preserve-3d;
+    margin: 2px;
+    border: 2px solid rgb(37, 16, 142);   
+}
+
+.card, .back, .front {
+    height: 150px;
+    width: 150px;
+}
+
+.back, .front {
+    position: absolute;
+    backface-visibility: hidden;
+}
+
+.front {
+    background: red url(../assets/question.svg) no-repeat center center /
+     contain;
+}
+
+.back {
+    transform: rotateY(180deg);
+    background-color: rgb(245, 244, 246);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.selected {
+    transform: rotateY(180deg);
+    border: 6px solid rgba(109, 74, 207, 0.7);
+    background-color: rgb(245, 244, 246);
+}
+
+.match .front {
+    background: white;
+    border: 6px solid rgba(22, 152, 17, 0.7);   
+}
+
+.win-message {
+    font-size: xx-large;
+    font-weight: bolder;
+    color: red; 
+    display: flex;
+    justify-content: center;
 }
