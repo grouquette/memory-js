@@ -59,7 +59,7 @@ nav {
 
       &:nth-child(2n) {
         a {
-          background-color: #008737;
+          background-color: #4db6c4;
         }
       }
 
@@ -77,66 +77,101 @@ nav {
 
       &:nth-child(5n) {
         a {
-          background-color: #d16a21;
+          background-color: #f2b488;
         }
       }
     }
   }
 }
 .grid {
-    max-width: 960px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 10px;  
+  padding-left: 10px;
+  max-width: 960px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
 }
 
 .card {
-    position: relative;
-    transition: all 0.4s linear;
-    transform-style: preserve-3d;
-    margin: 2px;
-    border: 2px solid rgb(37, 16, 142);   
+  
+  position: relative;
+  transition: all 0.4s linear;
+  transform-style: preserve-3d;
+  margin: 2px;
+  border: 2px solid rgb(37, 16, 142);
 }
 
-.card, .back, .front {
-    height: 150px;
-    width: 150px;
+.card,
+.back,
+.front {
+  height: 150px;
+  width: 150px;
 }
 
-.back, .front {
-    position: absolute;
-    backface-visibility: hidden;
+.back,
+.front {
+  position: absolute;
+  backface-visibility: hidden;
 }
 
 .front {
-    background: red url(../assets/question.svg) no-repeat center center /
-     contain;
+  background: red url(../assets/question.svg) no-repeat center center / contain;
 }
 
 .back {
-    transform: rotateY(180deg);
-    background-color: rgb(245, 244, 246);
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center center;
+  transform: rotateY(180deg);
+  background-color: rgb(245, 244, 246);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
 .selected {
-    transform: rotateY(180deg);
-    border: 6px solid rgba(109, 74, 207, 0.7);
-    background-color: rgb(245, 244, 246);
+  transform: rotateY(180deg);
+  border: 6px solid rgba(109, 74, 207, 0.7);
+  background-color: rgb(245, 244, 246);
 }
 
 .match .front {
-    background: white;
-    border: 6px solid rgba(22, 152, 17, 0.7);   
+  background: white;
+  border: 6px solid rgba(22, 152, 17, 0.7);
 }
 
-.win-message {
-    font-size: xx-large;
-    font-weight: bolder;
-    color: red; 
-    display: flex;
-    justify-content: center;
+h1 {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 3.5rem;
+  color: rgb(37, 16, 142);
+}
+
+h2 {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 2.5rem;
+  color: rgb(23, 98, 30);
+}
+
+p {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 1.5rem;
+}
+.win-message, #nbTry {
+  font-size: xx-large;
+  font-weight: bolder;
+  color: rgb(186, 25, 151);
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.container {
+  display: block;
+}
+
+#set-img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
 }

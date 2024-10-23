@@ -1,3 +1,4 @@
+
 // Card data
 const cardsArray = [
   {
@@ -34,6 +35,13 @@ const cardsArray = [
   },
 ];
 
+let testCount = 0;
+let count = 0;
+let firstGuess = "";
+let secondGuess = "";
+let previousTarget = null;
+const delay = 1200;
+
 // Sélection des div avec id game
 const game = document.getElementById("game");
 
@@ -43,38 +51,45 @@ grid.setAttribute("class", "grid");
 
 game.appendChild(grid);
 
-// Create double cards
-const gameGrid = cardsArray.concat(cardsArray);
-gameGrid.sort(() => 0.5 - Math.random());
-gameGrid.forEach((item) => {
-  // Create div
-  const card = document.createElement("div");
+function resetGame() {
+  grid.innerHTML = "";
+  testCount = 0;
+  // Create double cards
+  const gameGrid = cardsArray.concat(cardsArray);
+  gameGrid.sort(() => 0.5 - Math.random());
+  gameGrid.forEach((item) => {
+    // Create div
+    const card = document.createElement("div");
+
+    // Create each card
+    card.classList.add("card");
+    card.dataset.name = item.name;
+
+    // Create front of the card
+    const front = document.createElement("div");
+    front.classList.add("front");
+
+    // Create back of the card
+    const back = document.createElement("div");
+    back.classList.add("back");
+    back.style.backgroundImage = `url(${item.img})`;
+
+    // Insert cards in grid front and back too
+    grid.appendChild(card);
+    card.appendChild(front);
+    card.appendChild(back);
+  });
   
-  // Create each card
-  card.classList.add("card");
-  card.dataset.name = item.name;
-  
-  // Create front of the card
-  const front = document.createElement("div");
-  front.classList.add("front");
-  
-  // Create back of the card
-  const back = document.createElement("div");
-  back.classList.add("back");
-  back.style.backgroundImage = `url(${item.img})`;
-  
-  // Insert cards in grid front and back too 
-  grid.appendChild(card);
-  card.appendChild(front);
-  card.appendChild(back);
-});
+  const winMessage = document.querySelector(".win-message");
+  if (winMessage) {
+    winMessage.remove();
+  }
+}
+
+resetGame();
 
 
-let count = 0;
-let firstGuess = "";
-let secondGuess = "";
-let previousTarget = null;
-const delay = 2000;
+
 
 
 // Function for match
@@ -98,6 +113,7 @@ const resetGuesses = () => {
     card.classList.remove("selected");
   });
 };
+
 // Function for check if win
 function checkWin() {
   const allCardsRevealed =
@@ -113,8 +129,14 @@ function checkWin() {
 function displayWinMessage() {
   const winMessage = document.createElement("div");
   winMessage.classList.add("win-message");
-  winMessage.textContent = "Bravo, vous avez gagné ! Pressez une touche pour rejouer";
+  winMessage.textContent = "Bravo, vous avez gagné en " + testCount + " essais ! Pressez la touche espace pour rejouer";
   document.body.appendChild(winMessage);
+  
+  document.addEventListener("keydown", function (event) {
+    if (event.code === "Space") {
+      resetGame();
+    }
+  });
 }
 
 // Add event listener to grid
@@ -137,8 +159,6 @@ grid.addEventListener("click", (event) => {
       
       // Assign first guess ascending to parentNode
       firstGuess = clickedCard.parentNode.dataset.name;
-      console.log(firstGuess);
-      
       clickedCard.parentNode.classList.add("selected");
       
       // Avoid double click on a card
@@ -147,8 +167,6 @@ grid.addEventListener("click", (event) => {
       
       // Assign second guess ascending to parentNode
       secondGuess = clickedCard.parentNode.dataset.name;
-      console.log(secondGuess);
-      
       clickedCard.parentNode.classList.add("selected");
     }
     
@@ -164,9 +182,16 @@ grid.addEventListener("click", (event) => {
       } else {
         setTimeout(resetGuesses, delay);
       }
+      // Increase testCount
+      testCount++;
+
+      // Display testCount  
+      const tries = document.getElementById("nbTry");
+      tries.innerHTML = "Tentatives : " + testCount;
     }
   }
 });
+
 
 
 
