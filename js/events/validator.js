@@ -4,38 +4,38 @@
  * @returns {boolean}
  */
 const nameValidator = (nodeID) => {
-    const nameRegexp = /^[a-zA-Z0-9]{3,20}$/;
+    const nameRegexp = /^[a-zA-Z0-9]{3,}$/;
     const nameValid = nameRegexp.test(document.getElementById(nodeID).value);
     return nameValid;    
 
 }
 /**
  * Check if username don't already exist
- * @param {string} nodeID 
+ * @param {}  
  * @returns {boolean}
  */
-const nameChecker = (nodeID) => {
-    if (JSON.parse(localStorage.getItem("users"))=== null || nodeID.valueOf !== JSON.parse(localStorage.getItem("users")).username) {
-        const nameCheck = true;
-        return nameCheck;
-    } else {
-        const nameCheck = false;
-        return nameCheck;
-    }
+const nameChecker = () => {
+    const usernameInput = document.getElementById("username").value;
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+        
+    const nameCheck = users.some(function (user) {
+       return user.username === usernameInput; 
+    }); 
+    return nameCheck;
 }
 /**
  * Check if email don't already exist
- * @param {string} nodeID 
+ * @param {} 
  * @returns {boolean}
  */
-const emailChecker = (nodeID) => {
-    if (JSON.parse(localStorage.getItem("users"))=== null || nodeID.valueOf !== JSON.parse(localStorage.getItem("users")).email) {
-        const emailCheck = true;
-        return emailCheck;
-    } else {
-        const emailCheck = false;
-        return emailCheck;
-    }
+const emailChecker = () => {
+    const mailInput = document.getElementById("mail").value;
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const mailCheck = users.some(function (user) {
+        return user.mail === mailInput;
+    })
+    return mailCheck;
+    
 }
 
 /**
@@ -53,7 +53,7 @@ const emailValidator = (nodeID) => {
 };
 
 /**
- * Check Password
+ * Check Password Validity
  * @param {string} nodeID
  * @returns {boolean}
  */
@@ -68,8 +68,8 @@ const passwordValidator = (nodeID) => {
   return passwordValid;
 };
 /**
- * 
- * @param {string} nodeID 
+ * Check Confirm Password
+ * @param {string} nodeID, {string} password1
  * @returns {boolean}
  */
 const confirmValidator = (nodeID, password1) => {
