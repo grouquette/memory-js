@@ -42,7 +42,7 @@ function init() {
   };
   
   $signupForm.addEventListener("submit", function (event) {
-    event.preventDefault(); // Prevent page refresh
+    event.preventDefault(); 
 
     const $inputs = this.querySelectorAll("input");
 

@@ -44,8 +44,6 @@ const emailChecker = () => {
  * @returns {boolean}
  */
 const emailValidator = (nodeID) => {
-  // Cette expression régulière est conçue pour vérifier que l'adresse e-mail saisie est
-  // conforme au format standard, avec un nom d'utilisateur qui peut contenir des lettres, des chiffres et des caractères spéciaux, suivi du signe "@" et d'un nom de domaine qui peut contenir des lettres, des chiffres, des tirets et des points.
   const emailRegexp = new RegExp(/^[^\s@]+@[^\s@]+\.[^\s@]{2,4}$/);
 
   const mailValid = emailRegexp.test(document.getElementById(nodeID).value);
@@ -60,7 +58,6 @@ const emailValidator = (nodeID) => {
 const passwordValidator = (nodeID) => {
   const passwordRegexp = new RegExp(
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^-_&*])(?=.{6,})/);
-    // 1 minuscule, 1 majuscule, 1 chiffre, 1 caractère special et 6 caractères minimum 
 
   const passwordValid = passwordRegexp.test(
     document.getElementById(nodeID).value
