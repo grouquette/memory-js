@@ -13,17 +13,13 @@ window.onload = init;
 
 function init() {
 
-  // Target
   const $signupForm = document.getElementById("signup-form");
   const $errorMessage = document.getElementById("errorMessage");
 
-  // Manage errors
   const errors = [];
   
-  // Check password strength
   let password = document.getElementById("password1");
   let power = document.getElementById("power-point");
-  // Strength level text
   let powerText = document.getElementById("power-text");
   password.oninput = function () {
     let point = 0;
@@ -45,17 +41,13 @@ function init() {
     powerText.innerHTML = strength[point];
   };
   
-  // Listen
   $signupForm.addEventListener("submit", function (event) {
     event.preventDefault(); // Prevent page refresh
 
-    // Return all HTMLElement with input
     const $inputs = this.querySelectorAll("input");
 
-    //  Création d'un Objet User en devenir
     const user = {};
 
-    // Loop to validate
     for (const input of $inputs) {
       const testMail = emailValidator("mail");
       const noDoubleMail = emailChecker("mail");
@@ -106,7 +98,6 @@ function init() {
       }
     }
 
-    // Manage empty errors
     if (errors.length > 0) {
       $errorMessage.innerHTML = errors.join("<br>");
       const verifImg = document.createElement("img");
@@ -115,7 +106,6 @@ function init() {
       $errorMessage.appendChild(verifImg);
       $errorMessage.classList.remove("hidden");
 
-      // Timer errors msg
       setTimeout(() => {
         $errorMessage.classList.add("hidden");
         errors.splice(0, errors.length);
@@ -130,10 +120,8 @@ function init() {
       errors.splice(0, errors.length);
     }
 
-    // Clear inputs
     this.reset();
 
-    // focus
     this.querySelector("#username").focus();
   });
 }

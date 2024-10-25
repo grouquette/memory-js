@@ -2,36 +2,36 @@
 // Card data
 const cardsArray = [
   {
-    name: "mouse",
-    img: "assets/animauxAnimes/1.webp",
+    name: "dolmen",
+    img: "assets/Breizh/dolmen.png",
   },
   {
-    name: "bee",
-    img: "assets/animauxAnimes/2.webp",
+    name: "becassine",
+    img: "assets/Breizh/becassine.png",
   },
   {
-    name: "hedgehog",
-    img: "assets/animauxAnimes/3.webp",
+    name: "caramel",
+    img: "assets/Breizh/caramel.jpg",
   },
   {
-    name: "frog",
-    img: "assets/animauxAnimes/4.webp",
+    name: "carte",
+    img: "assets/Breizh/carte_bretagne.jpg",
   },
   {
-    name: "puffer",
-    img: "assets/animauxAnimes/5.webp",
+    name: "cornemuse",
+    img: "assets/Breizh/cornemuse.png",
   },
   {
-    name: "stripe",
-    img: "assets/animauxAnimes/6.webp",
+    name: "hermine",
+    img: "assets/Breizh/hermine.png",
   },
   {
-    name: "caterpillar",
-    img: "assets/animauxAnimes/7.webp",
+    name: "korrigans",
+    img: "assets/Breizh/korrigans.png",
   },
   {
-    name: "jellyfish",
-    img: "assets/animauxAnimes/8.webp",
+    name: "triskell",
+    img: "assets/Breizh/triskell.png",
   },
 ];
 
@@ -42,10 +42,8 @@ let secondGuess = "";
 let previousTarget = null;
 const delay = 1200;
 
-// Sélection des div avec id game
 const game = document.getElementById("game");
 
-// Create section with grid
 const grid = document.createElement("section");
 grid.setAttribute("class", "grid");
 
@@ -54,27 +52,21 @@ game.appendChild(grid);
 function resetGame() {
   grid.innerHTML = "";
   testCount = 0;
-  // Create double cards
   const gameGrid = cardsArray.concat(cardsArray);
   gameGrid.sort(() => 0.5 - Math.random());
   gameGrid.forEach((item) => {
-    // Create div
     const card = document.createElement("div");
 
-    // Create each card
     card.classList.add("card");
     card.dataset.name = item.name;
 
-    // Create front of the card
     const front = document.createElement("div");
     front.classList.add("front");
 
-    // Create back of the card
     const back = document.createElement("div");
     back.classList.add("back");
     back.style.backgroundImage = `url(${item.img})`;
 
-    // Insert cards in grid front and back too
     grid.appendChild(card);
     card.appendChild(front);
     card.appendChild(back);
@@ -92,7 +84,6 @@ resetGame();
 
 
 
-// Function for match
 const match = () => {
   let selectedCards = document.querySelectorAll(".selected");
   selectedCards.forEach((card) => {
@@ -102,7 +93,6 @@ const match = () => {
   });
 };
 
-// Function for reset
 const resetGuesses = () => {
   firstGuess = "";
   secondGuess = "";
@@ -114,7 +104,6 @@ const resetGuesses = () => {
   });
 };
 
-// Function for check if win
 function checkWin() {
   const allCardsRevealed =
     document.querySelectorAll(".card.match").length ===
@@ -125,7 +114,6 @@ function checkWin() {
   }
 }
 
-// Display win Message
 function displayWinMessage() {
   const winMessage = document.createElement("div");
   winMessage.classList.add("win-message");
@@ -139,13 +127,10 @@ function displayWinMessage() {
   });
 }
 
-// Add event listener to grid
 grid.addEventListener("click", (event) => {
   
-  // When a card is clicked
   let clickedCard = event.target;
   
-  // Select just div and avoid double click on a card
   if (
     clickedCard.nodeName === "SECTION" ||
     clickedCard === previousTarget || clickedCard.parentNode.classList.contains("selected")
@@ -157,35 +142,27 @@ grid.addEventListener("click", (event) => {
     count++;
     if (count === 1) {
       
-      // Assign first guess ascending to parentNode
       firstGuess = clickedCard.parentNode.dataset.name;
       clickedCard.parentNode.classList.add("selected");
       
-      // Avoid double click on a card
       previousTarget = clickedCard;
     } else {
       
-      // Assign second guess ascending to parentNode
       secondGuess = clickedCard.parentNode.dataset.name;
       clickedCard.parentNode.classList.add("selected");
     }
     
-    // Check if the guess are empty
     if (firstGuess !== "" && secondGuess !== "") {
       if (firstGuess === secondGuess) {
         
-        // Call match function with delay
         setTimeout(match, delay);
         
-        // Reset guesses with delay
         setTimeout(resetGuesses, delay);
       } else {
         setTimeout(resetGuesses, delay);
       }
-      // Increase testCount
       testCount++;
 
-      // Display testCount  
       const tries = document.getElementById("nbTry");
       tries.innerHTML = "Tentatives : " + testCount;
     }
