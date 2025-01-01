@@ -1,3 +1,5 @@
+import { getDatas, setData } from "./events/storage.js";
+
 // Card data
 const cardsArray = [
   {
@@ -116,8 +118,34 @@ function checkWin() {
   const allCardsRevealed =
     document.querySelectorAll(".card.match").length ===
     document.querySelectorAll(".card").length;
+  
   if (allCardsRevealed) {
     displayWinMessage();
+    
+    const users = getDatas("users") || []; ;
+    const currentUser = getDatas("currentUser") || [];
+    
+    if (currentUser && users) {
+      const userIndex = users.findIndex(
+        (user) => user.email === currentUser.email
+      );
+      
+      if (userIndex !== -1) {
+        const user = users[userIndex];
+        // Ajouter ou mettre à jour le champ "score" avec le nombre de tentatives
+        currentUser.score = testCount;
+        user.score =  testCount;
+        // Mettre à jour le localStorage avec les nouvelles infos de l'utilisateur
+        localStorage.setItem("currentUser", JSON.stringify(currentUser));
+        // setData("currentUser", currentUser);
+        users[userIndex] = user; // Mettre à jour l'utilisateur dans le tableau
+        localStorage.setItem("users", JSON.stringify(users));
+      
+       // localStorage.setItem("users", JSON.stringify(user));
+      }
+    } else {
+      console.log("Utilisateur non trouvé dans le localStorage !");
+    }
   }
 }
 

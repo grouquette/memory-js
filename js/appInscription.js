@@ -8,8 +8,7 @@ import {
 } from "./events/validator.js";
 
 import { setData } from "./events/storage.js";
-
-  // Wait for the DOM to be ready before running function
+// Wait for the DOM to be ready before running function
 window.onload = init;
 
 function init() {
@@ -132,6 +131,7 @@ function init() {
       setData("users", user);
       alert("Inscription reussie !");
       errors.splice(0, errors.length);
+      window.location.href = "connexion.html";
     }
 
     // Clear inputs

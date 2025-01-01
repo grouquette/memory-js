@@ -15,6 +15,7 @@
         <li><a href="profil.html">Profil</a></li>
         <li><a href="connexion.html">Connexion</a></li>
         <li><a href="jouer.html">Jouer</a></li>
+        <li><button id="logoutButton">Déconnexion</button></li>
       </ul>
     </nav>
   </header>
@@ -25,16 +26,11 @@
       <ul>
         <li>
           <label for="username">Nom d'utilisateur</label>
-          <input type="name" id="username" placeholder="3 caractères minimum" />
+          <input type="text" id="username" placeholder="3 caractères minimum" />
         </li>
         <li>
           <label for="mail">Email</label>
-          <input
-            type="email"
-            id="mail"
-            placeholder="votre adresse mail"
-            required
-          />
+          <input type="email" id="mail" placeholder="votre adresse mail" required/>
         </li>
         <li>
           <label for="password1">Mot de passe</label>
@@ -64,11 +60,12 @@
           />
         </li>
 
-        <button>S'inscrire</button>
+        <button type="submit">S'inscrire</button>
       </ul>
       <div id="errorMessage" class="error"></div>
     </form>
 
     <script type="module" src="js/appInscription.js"></script>
+    <script type="module" src="js/navbar.js"></script>
   </body>
 </html>

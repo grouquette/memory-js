@@ -6,6 +6,8 @@
   --gris-breton: #b0b7bc;
   --lin-naturel: #f4f1de;
   --vert-mousse: #6a9a8b;
+  --text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  --background-overlay: rgba(255, 255, 255, 0.85);
 }
 
 * {
@@ -15,6 +17,7 @@
 }
 
 body {
+  background-image: url("../assets/Breizh/fondPage.webp");
   font-family: 'Merriweather', serif;
   color: var(--bleu-breton);
   background-color: var(--lin-naturel);
@@ -24,9 +27,22 @@ body {
   margin: 0;
 }
 
+/* Overlay semi-transparent pour atténuer l'image de fond */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(244, 241, 222, 0.85);
+  /* Utilise la couleur lin-naturel avec transparence */
+  z-index: -1;
+}
+
 nav {
   position: relative;
-  margin-top: 5%;
+  margin-top: 6rem;
   left: 50%;
   width: 100%;
   text-align: center;
@@ -96,20 +112,18 @@ nav {
     }
   }
 }
+
 form {
   background-color: #98de88;
-  /* margin: 5em 20em; */
   padding: 30px;
-  width: 400px;
-  height: 450px;
+  width: min(400px, 90%);
+  min-height: 450px;
   border: 2pt solid #e20e0e;
   border-radius: 10pt;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: baseline;
-  
-    
+  margin: 2rem auto;
 }
 
 .power-container {
@@ -184,12 +198,12 @@ button:active {
 }
 
 .grid{
-  padding-left: 10px;
+  padding: 1rem;
   max-width: 960px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
   background-color: rgba(210, 204, 204, 0.9); /* Légèrement transparent */
   border: 2px solid var(--bois-flotte);
   border-radius: 15px;
@@ -197,15 +211,16 @@ button:active {
 }
 
 .card {
-  width: 100px;
-  height: 140px;
+  width: 100%;
+  aspect-ratio: 2/3;
+  margin: 0 auto;
+  padding: auto;
   background: var(--gris-breton);
   border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2rem;
-  color: var(--lin-naturel);
+  font-size: clamp(1.5rem, 3vw, 2rem);
   cursor: pointer;
   position: relative;
   transform-style: preserve-3d;
@@ -286,6 +301,11 @@ p {
   display: block;
 }
 
+#logoutButton {
+  display: none;
+  /* Par défaut, le bouton est caché */
+}
+
 #errorMessage {
   color: red;
   font-weight: bolder;
@@ -296,4 +316,25 @@ p {
   margin: 0 auto;
   max-width: 100%;
   height: auto;
+}
+
+/* Media queries pour différentes tailles d'écran */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  }
+
+  nav ul li {
+    min-width: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  form {
+    padding: 15px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  }
 }
